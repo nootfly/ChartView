@@ -9,14 +9,14 @@
 import SwiftUI
 
 public struct PieChartView : View {
-    public var data: [Double]
+    public var data: [PieData]
     public var title: String
     public var legend: String?
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
 
-    public init(data: [Double], title: String, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(data: [PieData], title: String, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = data
         self.title = title
         self.legend = legend
@@ -41,7 +41,7 @@ public struct PieChartView : View {
                         .imageScale(.large)
                         .foregroundColor(self.style.legendTextColor)
                 }.padding()
-                PieChartRow(data: data, backgroundColor: self.style.backgroundColor, accentColor: self.style.accentColor)
+                PieChartRow(data: data)
                     .foregroundColor(self.style.accentColor).padding(self.legend != nil ? 0 : 12).offset(y:self.legend != nil ? 0 : -10)
                 if(self.legend != nil) {
                     Text(self.legend!)
@@ -58,7 +58,15 @@ public struct PieChartView : View {
 #if DEBUG
 struct PieChartView_Previews : PreviewProvider {
     static var previews: some View {
-        PieChartView(data:[56,78,53,65,54], title: "Title", legend: "Legend")
+        let bgColor =  Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0)
+               let accentColor = Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0)
+               let pieDataList = [PieData(data: 8, backgroundColor: bgColor, accentColor: accentColor),
+               PieData(data: 56, backgroundColor: bgColor, accentColor: accentColor),
+               PieData(data: 78,  backgroundColor: bgColor, accentColor: accentColor),
+               PieData(data: 53, backgroundColor: bgColor, accentColor: accentColor),
+               PieData(data: 65,  backgroundColor: bgColor, accentColor: accentColor),
+               PieData(data: 54, backgroundColor: bgColor, accentColor: accentColor)]
+        return PieChartView(data:pieDataList, title: "Title", legend: "Legend")
     }
 }
 #endif
