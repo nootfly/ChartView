@@ -11,4 +11,10 @@ public struct PieData {
     var data: Double
     var backgroundColor: Color
     var accentColor: Color
+
+    public init(data: Double, backgroundColor: Color, accentColor: Color) {
+        self.data = data
+        self.backgroundColor = backgroundColor
+        self.accentColor = accentColor
+    }
 }
