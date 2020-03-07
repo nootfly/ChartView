@@ -11,15 +11,15 @@ import SwiftUI
 public struct PieChartView : View {
     public var data: [PieData]
     public var title: String
-    public var legend: String?
+    public var legends: [String]?
     public var style: ChartStyle
     public var formSize:CGSize
     public var dropShadow: Bool
 
-    public init(data: [PieData], title: String, legend: String? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
+    public init(data: [PieData], title: String, legends: [String]? = nil, style: ChartStyle = Styles.pieChartStyleOne, form: CGSize? = ChartForm.medium, dropShadow: Bool? = true){
         self.data = data
         self.title = title
-        self.legend = legend
+        self.legends = legends
         self.style = style
         self.formSize = form!
         self.dropShadow = dropShadow!
@@ -42,12 +42,17 @@ public struct PieChartView : View {
                         .foregroundColor(self.style.legendTextColor)
                 }.padding()
                 PieChartRow(data: data)
-                    .foregroundColor(self.style.accentColor).padding(self.legend != nil ? 0 : 12).offset(y:self.legend != nil ? 0 : -10)
-                if(self.legend != nil) {
-                    Text(self.legend!)
-                        .font(.headline)
-                        .foregroundColor(self.style.legendTextColor)
-                        .padding()
+                    .foregroundColor(self.style.accentColor).padding(self.legends != nil ? 0 : 12).offset(y:self.legends != nil ? 0 : -10)
+                if(self.legends != nil) {
+                    List {
+                        ForEach(0..<legends!.count) { idx in
+                            Text(self.legends![idx])
+                                 .font(.subheadline)
+                                .foregroundColor(self.data[idx].accentColor)
+                                 .padding()
+                        }
+                    }
+
                 }
                 
             }
@@ -66,7 +71,7 @@ struct PieChartView_Previews : PreviewProvider {
                PieData(data: 53, backgroundColor: bgColor, accentColor: accentColor),
                PieData(data: 65,  backgroundColor: bgColor, accentColor: accentColor),
                PieData(data: 54, backgroundColor: bgColor, accentColor: accentColor)]
-        return PieChartView(data:pieDataList, title: "Title", legend: "Legend")
+        return PieChartView(data:pieDataList, title: "Title", legends: ["Legend"])
     }
 }
 #endif

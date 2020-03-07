@@ -9,12 +9,6 @@
 import SwiftUI
 
 
-public struct PieData {
-    var data: Double
-    var backgroundColor: Color
-    var accentColor: Color
-}
-
 public struct PieChartRow : View {
     var data: [PieData]
 
