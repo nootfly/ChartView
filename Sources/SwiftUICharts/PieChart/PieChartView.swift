@@ -42,18 +42,16 @@ public struct PieChartView : View {
                         .foregroundColor(self.style.legendTextColor)
                 }.padding()
                 PieChartRow(data: data)
-                    .foregroundColor(self.style.accentColor).padding(self.legends != nil ? 0 : 12).offset(y:self.legends != nil ? 0 : -10)
-                if(self.legends != nil) {
+                    .foregroundColor(self.style.accentColor).padding( 12).offset(y: -10)
+
                     List {
-                        ForEach(0..<legends!.count) { idx in
-                            Text(self.legends![idx])
-                                 .font(.subheadline)
-                                .foregroundColor(self.data[idx].accentColor)
-                                 .padding()
+                        ForEach(data, id: \.title) { pieData in
+                            Text(pieData.title)
+                                .font(.footnote)
+                                .foregroundColor(pieData.accentColor)
                         }
                     }
 
-                }
                 
             }
         }.frame(width: self.formSize.width, height: self.formSize.height)
@@ -65,12 +63,12 @@ struct PieChartView_Previews : PreviewProvider {
     static var previews: some View {
         let bgColor =  Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0)
                let accentColor = Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0)
-               let pieDataList = [PieData(data: 8, backgroundColor: bgColor, accentColor: accentColor),
-               PieData(data: 56, backgroundColor: bgColor, accentColor: accentColor),
-               PieData(data: 78,  backgroundColor: bgColor, accentColor: accentColor),
-               PieData(data: 53, backgroundColor: bgColor, accentColor: accentColor),
-               PieData(data: 65,  backgroundColor: bgColor, accentColor: accentColor),
-               PieData(data: 54, backgroundColor: bgColor, accentColor: accentColor)]
+               let pieDataList = [PieData(data: 8, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+               PieData(data: 56, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+               PieData(data: 78,  backgroundColor: bgColor, accentColor: accentColor, title: ""),
+               PieData(data: 53, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+               PieData(data: 65,  backgroundColor: bgColor, accentColor: accentColor, title: ""),
+               PieData(data: 54, backgroundColor: bgColor, accentColor: accentColor, title: "")]
         return PieChartView(data:pieDataList, title: "Title", legends: ["Legend"])
     }
 }

@@ -43,12 +43,12 @@ struct PieChartRow_Previews : PreviewProvider {
     static var previews: some View {
         let bgColor =  Color(red: 252.0/255.0, green: 236.0/255.0, blue: 234.0/255.0)
         let accentColor = Color(red: 225.0/255.0, green: 97.0/255.0, blue: 76.0/255.0)
-        let pieDataList = [PieData(data: 8, backgroundColor: bgColor, accentColor: accentColor),
-        PieData(data: 23, backgroundColor: bgColor, accentColor: accentColor),
-        PieData(data: 54,  backgroundColor: bgColor, accentColor: accentColor),
-        PieData(data: 32, backgroundColor: bgColor, accentColor: accentColor),
-        PieData(data: 12, backgroundColor: bgColor, accentColor: accentColor),
-        PieData(data: 37, backgroundColor: bgColor, accentColor: accentColor)]
+        let pieDataList = [PieData(data: 8, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+        PieData(data: 23, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+        PieData(data: 54,  backgroundColor: bgColor, accentColor: accentColor, title: ""),
+        PieData(data: 32, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+        PieData(data: 12, backgroundColor: bgColor, accentColor: accentColor, title: ""),
+        PieData(data: 37, backgroundColor: bgColor, accentColor: accentColor, title: "")]
         return PieChartRow(data:pieDataList).frame(width: 100, height: 100)
         
     }
